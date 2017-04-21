@@ -12,9 +12,13 @@ var promiseStrings = new Promise(function (fulfill, reject) {
 })
 
 const asyncYolo = (input) => {
-
-  // Your future job begins here ...
-
+  Promise.all([promiseStrings, promiseNumbers]).then(values => {
+    var all  = values[0].filter((va) => parseInt(va))
+    var cal  = values[1].slice(0,all.length).map(function(x,i) {
+      return x + parseInt(all[i]);
+    });
+    input(cal);
+  });
 }
 
 module.exports = {
